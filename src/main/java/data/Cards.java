@@ -4,7 +4,7 @@ package data;
 public class Cards extends MainProduct{
 
     public Cards(Currency currency, String name) {
-        super(currency, name);
+        super(currency, name, 0.00);
     }
 
     protected Cards() {}

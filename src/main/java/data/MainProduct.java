@@ -8,10 +8,10 @@ public class MainProduct {
     protected String name;
     protected Double balance;
 
-    public MainProduct(Currency currency, String name) {
+    public MainProduct(Currency currency, String name, Double balance) {
         this.currency = currency;
         this.name = name;
-        this.balance = 0.0;
+        this.balance = balance;
     }
 
     protected MainProduct() {
