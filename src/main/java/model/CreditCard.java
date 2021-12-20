@@ -1,3 +1,5 @@
+package model;
+
 import data.Credit;
 import data.Currency;
 import data.MainProduct;

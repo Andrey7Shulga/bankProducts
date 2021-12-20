@@ -1,4 +1,5 @@
-import data.Credit;
+package model;
+
 import data.Currency;
 import data.MainProduct;
 

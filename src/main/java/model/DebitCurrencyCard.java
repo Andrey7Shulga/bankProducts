@@ -1,11 +1,17 @@
+package model;
+
 import data.Credit;
 import data.Currency;
 import data.MainProduct;
 
-public class DebitCard extends MainProduct implements Credit {
+public class DebitCurrencyCard extends MainProduct implements Credit {
 
-    public DebitCard(String name) {
-        super(Currency.RUB, name);
+    public DebitCurrencyCard(Currency currency, String name) {
+        if (currency == Currency.RUB) {
+            throw new IllegalArgumentException("Валютой вклада должна быть 'EUR' или 'USD'");
+        }
+            super.currency = currency;
+            super.name = name;
     }
 
     @Override
