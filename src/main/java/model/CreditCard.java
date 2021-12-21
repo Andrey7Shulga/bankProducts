@@ -3,6 +3,8 @@ package model;
 import data.Cards;
 import data.Currency;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class CreditCard extends Cards {
 
@@ -27,26 +29,25 @@ public class CreditCard extends Cards {
     @Override
     public void credit(Double creditSum) {super.credit(creditSum);}
 
-    public Double getDebtValue (int period) {
+    public BigDecimal getDebtValue (int period) {
         period = Math.max(0, period);
-        if (getBalance() < 0) {
-            return getBalance() + getBalance()*rate*period/(365*100);
+        double delta = getLimit() - getBalance();
+        if (delta > 0.00) {
+            BigDecimal bd = new BigDecimal(delta*rate*period/(365*100));
+            return bd.setScale(2, RoundingMode.FLOOR);
         }
-        return 0.0;
+        return null;
     }
 
     public double getRate() {
         return rate;
     }
-
     public void setRate(double rate) {
         this.rate = rate;
     }
-
     public double getLimit() {
         return limit;
     }
-
     public void setLimit(double limit) {
         this.limit = Math.max(limit, 0.00);
     }

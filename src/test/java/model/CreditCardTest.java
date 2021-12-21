@@ -2,7 +2,12 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.math.BigDecimal;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,7 +17,7 @@ public class CreditCardTest {
 
     @BeforeEach
     void settingUP() {
-        creditCard = new CreditCard("Petrov", 3.54, 1000.00);
+        creditCard = new CreditCard("Petrov", 10.00, 1000.00);
     }
 
     @ParameterizedTest
@@ -55,10 +60,49 @@ public class CreditCardTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {2000.55})
+    @ValueSource(doubles = {3000.55, 2000.55})
     void decrease_ifCreditCardInvalid_2_balanceIsTheSame (Double sum) {
         //увеличить баланс
         creditCard.deposit(1000.54);
+        Double balance = creditCard.getBalance();
+        //списание
+        Throwable ex = assertThrowsExactly(IllegalArgumentException.class, () -> creditCard.credit(sum));
+        assertTrue(ex.getMessage().contains("больше баланса"));
+        assertTrue(ex.getMessage().contains("укажите другую сумму"));
+        assertEquals(balance, creditCard.getBalance());
+    }
+
+    @ParameterizedTest
+    @MethodSource("positiveDebtCalculation")
+    void getDebt_ifCreditCard_DebtIsCalculated (Double sum, int period, String result) {
+        //списать с карты
+        creditCard.credit(sum);
+        //Расчет
+        BigDecimal debt = creditCard.getDebtValue(period);
+        assertEquals(new BigDecimal(result), debt);
+    }
+
+    private static Stream<Arguments> positiveDebtCalculation() {
+        return Stream.of(
+                Arguments.of(1000.00, 365, "100.00"),
+                Arguments.of(800.00, 180, "39.45"),
+                Arguments.of(500.00, 0, "0.00")
+        );
+    }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {0.00})
+    void getDebt_ifCreditCardInvalid_balanceIsTheSame (Double sum) {
+        Double balance = creditCard.getBalance();
+        //взять кредит
+        Throwable ex = assertThrowsExactly(IllegalArgumentException.class, () -> creditCard.credit(sum));
+        assertTrue(ex.getMessage().contains("Сумма снятия не может быть равна нулю, укажите другую сумму"));
+        assertEquals(balance, creditCard.getBalance());
+    }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {1000.01, 3000})
+    void getDebt_ifCreditCardInvalid_2_balanceIsTheSame (Double sum) {
         Double balance = creditCard.getBalance();
         //списание
         Throwable ex = assertThrowsExactly(IllegalArgumentException.class, () -> creditCard.credit(sum));
