@@ -15,7 +15,12 @@ public class Cards extends MainProduct{
         } else if (creditSum == 0.00) {
             throw new IllegalArgumentException("Сумма снятия не может быть равна нулю, укажите другую сумму");
         } else {
-            throw new IllegalArgumentException("Сумма снятия больше баланса, укажите другую сумму");
+            throw new IllegalArgumentException(String.format("Сумма снятия '%s' больше баланса '%s', укажите другую сумму", creditSum, getBalance()));
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Card:" + super.toString();
     }
 }

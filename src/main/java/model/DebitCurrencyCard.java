@@ -12,4 +12,15 @@ public class DebitCurrencyCard extends Cards {
         }
     }
 
+    @Override
+    public Double getBalance() {return super.getBalance();}
+
+    @Override
+    public void deposit(Double depositSum) {super.deposit(depositSum);}
+
+    @Override
+    public void credit(Double creditSum) {super.credit(creditSum);}
+
+    @Override
+    public String toString() {return super.toString();}
 }

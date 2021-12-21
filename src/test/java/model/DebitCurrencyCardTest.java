@@ -98,9 +98,9 @@ public class DebitCurrencyCardTest {
                 Arguments.of(new DebitCurrencyCard(Currency.USD, "Smite"), 0.00,
                         "Сумма снятия не может быть равна нулю, укажите другую сумму"),
                 Arguments.of(new DebitCurrencyCard(Currency.EUR, "Smite"), 1500.00,
-                        "Сумма снятия больше баланса, укажите другую сумму"),
+                        "Сумма снятия '1500.0' больше баланса '1000.54', укажите другую сумму"),
                 Arguments.of(new DebitCurrencyCard(Currency.USD, "Smite"), 1500.00,
-                        "Сумма снятия больше баланса, укажите другую сумму")
+                        "Сумма снятия '1500.0' больше баланса '1000.54', укажите другую сумму")
         );
     }
 
