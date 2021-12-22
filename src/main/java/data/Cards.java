@@ -20,6 +20,16 @@ public class Cards extends MainProduct{
     }
 
     @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
     public String toString() {
         return "Card:" + super.toString();
     }

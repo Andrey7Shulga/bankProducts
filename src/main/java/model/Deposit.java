@@ -4,6 +4,8 @@ import data.CloseProduct;
 import data.Currency;
 import data.MainProduct;
 
+import java.util.Objects;
+
 public class Deposit extends MainProduct implements CloseProduct {
 
     private boolean isActive;
@@ -34,6 +36,20 @@ public class Deposit extends MainProduct implements CloseProduct {
             this.balance = 0.0;
         }
         isActive = false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Deposit)) return false;
+        if (!super.equals(o)) return false;
+        Deposit deposit = (Deposit) o;
+        return getActive() == deposit.getActive();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getActive());
     }
 
     @Override

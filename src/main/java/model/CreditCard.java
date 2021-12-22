@@ -5,6 +5,7 @@ import data.Currency;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Objects;
 
 public class CreditCard extends Cards {
 
@@ -51,6 +52,21 @@ public class CreditCard extends Cards {
     public void setLimit(double limit) {
         this.limit = Math.max(limit, 0.00);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CreditCard)) return false;
+        if (!super.equals(o)) return false;
+        CreditCard that = (CreditCard) o;
+        return Double.compare(that.getRate(), getRate()) == 0 && Double.compare(that.getLimit(), getLimit()) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getRate(), getLimit());
+    }
+
 
     @Override
     public String toString() {

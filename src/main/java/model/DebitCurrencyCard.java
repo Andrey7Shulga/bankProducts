@@ -22,5 +22,21 @@ public class DebitCurrencyCard extends Cards {
     public void credit(Double creditSum) {super.credit(creditSum);}
 
     @Override
-    public String toString() {return super.toString();}
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "DebitCurrencyCard{" +
+                "currency=" + currency +
+                ", name='" + name + '\'' +
+                ", balance=" + balance +
+                '}';
+    }
 }
