@@ -11,7 +11,7 @@ public class Cards extends MainProduct{
 
     public void credit(Double creditSum) {
         if (creditSum <= getBalance() && creditSum != 0.00) {
-            setBalance(getBalance()-creditSum);
+            this.balance = getBalance()-creditSum;
         } else if (creditSum == 0.00) {
             throw new IllegalArgumentException("Сумма снятия не может быть равна нулю, укажите другую сумму");
         } else {

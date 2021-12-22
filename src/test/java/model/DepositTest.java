@@ -45,8 +45,6 @@ public class DepositTest {
     void close_ifCloseDeposit_balanceIsNullAndNotActive (Double sum) {
         //увеличить баланс
         deposit.deposit(sum);
-        Double balance = deposit.getBalance();
-        System.out.println(balance);
         //закрытие
         deposit.closeProduct();
         assertEquals(0.0, deposit.getBalance());

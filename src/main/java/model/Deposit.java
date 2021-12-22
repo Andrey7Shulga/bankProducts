@@ -30,17 +30,14 @@ public class Deposit extends MainProduct implements CloseProduct {
 
     @Override
     public void closeProduct() {
-        if (getBalance() > 0) {setBalance(0.0);}
+        if (getBalance() > 0) {
+            this.balance = 0.0;
+        }
         isActive = false;
     }
 
     @Override
     public String toString() {
-        return "Deposit{" +
-                "currency=" + currency +
-                ", name='" + name + '\'' +
-                ", balance=" + balance +
-                ", isActive=" + isActive +
-                '}';
+        return "Deposit:" + super.toString();
     }
 }

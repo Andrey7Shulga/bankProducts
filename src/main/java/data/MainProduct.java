@@ -24,31 +24,19 @@ public class MainProduct {
         if (depositSum <= 0.0) {
             throw new IllegalArgumentException("Пополнение не может быть отрицательным или нулевым");
         }
-        setBalance(getBalance() + depositSum);
+        this.balance = getBalance() + depositSum;
     }
 
     public Currency getCurrency() {
         return currency;
     }
 
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Double getBalance() {
         return balance;
-    }
-
-    public void setBalance(Double balance) {
-        this.balance = balance;
     }
 
     @Override
