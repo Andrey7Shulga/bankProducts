@@ -14,8 +14,7 @@ public class MainProduct {
         this.balance = balance;
     }
 
-    protected MainProduct() {
-    }
+    protected MainProduct() {}
 
     /**
      * Пополнение продукта

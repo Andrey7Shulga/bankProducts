@@ -1,9 +1,10 @@
 package model;
 
+import data.CloseProduct;
 import data.Currency;
 import data.MainProduct;
 
-public class Deposit extends MainProduct {
+public class Deposit extends MainProduct implements CloseProduct {
 
     private boolean isActive;
 
@@ -21,25 +22,25 @@ public class Deposit extends MainProduct {
     }
 
     @Override
-    public Double getBalance() {
-        if(!getActive()) {
-            throw new IllegalArgumentException("Вклад закрыт. Баланс нулевой");
-        }
-        return super.getBalance();
-    }
-
-    public void closeDeposit (Deposit deposit) {
-        if (deposit.getBalance() > 0.0) {
-            throw new IllegalArgumentException("Нельзя закрыть вклад с ненулевм остатком");
-        }
-        deposit.setActive(false);
-    }
+    public Double getBalance() {return super.getBalance();}
 
     public boolean getActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    @Override
+    public void closeProduct() {
+        if (getBalance() > 0) {setBalance(0.0);}
+        isActive = false;
+    }
+
+    @Override
+    public String toString() {
+        return "Deposit{" +
+                "currency=" + currency +
+                ", name='" + name + '\'' +
+                ", balance=" + balance +
+                ", isActive=" + isActive +
+                '}';
     }
 }
